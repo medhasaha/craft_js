@@ -5,14 +5,21 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/lab": "^4.0.0-alpha.24",
+    "@material-ui/pickers": "^3.2.5",
+    "@material-ui/styles": "^4.3.3",
+    "hd-grapesjs": "file:..",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "^1.1.4",
-    "hd-grapesjs": "file:.."
+    "@craftjs/core": "0.1.0-beta.13"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
