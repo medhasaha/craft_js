@@ -75,9 +75,10 @@ export const Card = ({padding, margin, children})  => {
     <MaterialCard 
       ref={(ref) => connect(drag(ref))}
       style = {{width : "auto", 
-                maxWidth : "720px", 
+                maxWidth : "150px", 
                 padding: `${padding}px`, 
-                margin: `${margin}px`, 
+                margin: `${margin}px`,
+                // display : "inline-block" 
                 }}>
       {children}
     </MaterialCard>
@@ -90,6 +91,7 @@ export const CardDefaultProps = {
 };
 
 Card.craft = {
+  displayName: "Card",
   props: CardDefaultProps,
   // related: {
     // settings: ContainerSettings,

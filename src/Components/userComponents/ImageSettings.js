@@ -7,6 +7,7 @@ import { Typography, Grid, FormControl, FormLabel, Input, InputBase, InputLabel,
 
 const style = theme => ({
 	outerDiv: {
+		width : "fit-content",
 		border: "1px solid rgba(255, 255, 255, 0.23)",
 		display : "inline-block",
 		// width : "120px",
@@ -89,7 +90,7 @@ const ImageSettings = (props) => {
 
 				<Grid item xs = {12} style = {{padding : "16px"}}>
 					<FormControl fullWidth={true} margin="normal" component="fieldset">
-						<FormLabel component="legend" style = {{marginBottom : "20px"}}>Height</FormLabel>
+						<FormLabel component="legend" style = {{marginBottom : "20px"}}>Height (px)</FormLabel>
 						{/*<Slider
 							value={height || 150}
 							step={10}
@@ -112,8 +113,9 @@ const ImageSettings = (props) => {
 												 classes = {{input : classes.inputBaseInput}}
 												 className = {classes.inputBase}
 												 onChange = {(event) => {
-													 setImgHeight(event.target.value);
-													 setProp((props) => (props.height = event.target.value), 1000);
+													 let n = parseInt(event.target.value);
+													 setImgHeight(n);
+													 setProp((props) => (props.height = n), 1000);
 												 }} />
 							<div className={classes.valueButton} id="increase" 
 									 style = {{  marginLeft: "-4px", borderLeft : "1px solid rgba(255, 255, 255, 0.23)"}}
@@ -132,7 +134,7 @@ const ImageSettings = (props) => {
 
 				<Grid item xs = {12} style = {{padding : "16px"}}>
 				  <FormControl fullWidth={true} margin="normal" component="fieldset">
-						<FormLabel component="legend" style = {{marginBottom : "20px"}}>Width</FormLabel>
+						<FormLabel component="legend" style = {{marginBottom : "20px"}}>Width (%)</FormLabel>
 						{/*<Slider
 							value={width || 14}
 							step={10}
@@ -151,17 +153,18 @@ const ImageSettings = (props) => {
 										 setProp((props) => (props.width = newWidth), 1000);
 							 		 }}>-</div>
 							<InputBase type="number"
-												 value = {imgWidth || 150} 
+												 value = {imgWidth || 100} 
 												 classes = {{input : classes.inputBaseInput}}
 												 className = {classes.inputBase}
 												 onChange = {(event) => {
-													setImgWidth(event.target.value);
-													 setProp((props) => (props.width = event.target.value), 1000);
+													 let n = parseInt(event.target.value);
+													 setImgWidth(n);
+													 setProp((props) => (props.width = n), 1000);
 												 }} />
 							<div className={classes.valueButton} id="increase" 
 									 style = {{  marginLeft: "-4px", borderLeft : "1px solid rgba(255, 255, 255, 0.23)"}}
 									 onClick={() => {
-										 let newWidth = imgWidth + 1 > 720 ? 720 : imgWidth + 1;
+										 let newWidth = imgWidth + 1 > 100 ? 100 : imgWidth + 1;
 										 setImgWidth(newWidth);
 										 setProp((props) => (props.width = newWidth), 1000);
 									 }}>+</div>

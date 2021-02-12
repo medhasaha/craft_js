@@ -6,10 +6,9 @@ import Drawer from '@material-ui/core/Drawer';
 
 import {Editor, Frame, Element} from "@craftjs/core";
 import Toolbox from '../Components/editorComponents/Toolbox';
-import SettingsPanel from '../components/editorComponents/SettingsPanel';
+import SettingsPanel from '../Components/editorComponents/SettingsPanel';
 import { Topbar } from '../Components/editorComponents/Topbar';
 import { Preview } from './Preview.js';
-// import {renderMarkup} from '../Components/Output'
 import {RenderNode} from '../Components/editorComponents/RenderNode'
 
 import { Container } from '../Components/userComponents/Container';
@@ -18,6 +17,9 @@ import { Image } from '../Components/userComponents/Image';
 import { Card, CardBottom, CardTop  } from '../Components/userComponents/Card';
 import { Text } from '../Components/userComponents/Text';
 import {TwoColGrid} from '../Components/userComponents/TwoColGrid'
+import {TwoRowGrid} from '../Components/userComponents/TwoRowGrid'
+import {Blocks} from '../Components/userComponents/Blocks'
+
 
 const styles = (theme) => ({
 	outerPaper:{
@@ -36,7 +38,7 @@ const styles = (theme) => ({
     alignSelf: "flex-end",
 	},
 	drawerPaper: {
-		maxWidth : "220px",
+		maxWidth : "320px",
 		overflowX : "hidden",
 		margin : "4px 150px 0px 0px",
   },
@@ -56,7 +58,9 @@ class MainComponent extends Component {
         flag_img: "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/100px-Flag_of_Germany.svg.png",
         flag_official_name: "Bundesflagge",
         flag_unofficial_name: "Federal Flag",
-      }
+			},
+			livePreviewState : null,
+			livePreviewFlag : false,
 		}
 	}
 
@@ -80,16 +84,12 @@ class MainComponent extends Component {
 		console.log("input",input)
 		this.setState({
 			showPreview : false
-		}
-		, () => {
+		}, () => {
 			this.setState({
 				previewState : input,
 				showPreview : true
 			})
-		}
-		)
-
-
+		})
 	}
 
 	isSelectedMethod = (value) => {
@@ -117,14 +117,14 @@ class MainComponent extends Component {
     Object.keys(newJsonNodes).map(key => {
       // console.log(newJsonNodes[key])
       let item = newJsonNodes[key]
-      if(item.type.resolvedName === "Text"){
+      if(item.type && item.type.resolvedName === "Text"){
         item.props.text = this.replaceColumn(item.props.text)
       }
-      if(item.type.resolvedName === "Image"){
+      if(item.type && item.type.resolvedName === "Image"){
         item.props.src = this.state.resultObject[item.props.selectedColumn]
       }
 		})
-	  console.log(newJsonNodes)
+	  // console.log(newJsonNodes)
     return newJsonNodes
   }
 
@@ -132,10 +132,19 @@ class MainComponent extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<Paper className = {classes.outerPaper}>
-				{/*this.state.final && renderMarkup(this.state.final)*/}
-
-				<Editor resolver={{ Card, Button, Text, Container, TwoColGrid, Image }} 
-								onRender={(e) => RenderNode(e)}>
+				<Editor resolver={{ Card, Button, Text, Container, TwoColGrid, Image, TwoRowGrid, Blocks }} 
+								onRender={(e) => RenderNode(e)} 
+								onNodesChange={query => {
+									// console.log("onNodesChange MainComponent", query.getSerializedNodes());
+									this.setState({
+										livePreviewFlag : false
+									}, () => {
+										this.setState({
+											livePreviewFlag : true,
+											livePreviewState : query.getSerializedNodes()
+										})
+									})
+								}}>
 					<Topbar getFinalObject = {this.getFinalObject} showPreview = {this.showPreviewMethod}/>
 					<Grid container spacing={5} style={{ paddingTop: '10px' }}>
 						<Grid item xs = {12}>
@@ -168,10 +177,14 @@ class MainComponent extends Component {
 
 						<Grid item xs = {12}>
 						  {this.state.showPreview && <Typography variant = "button" style = {{marginLeft : "14px"}}>Preview</Typography>}
-							{<Editor enabled={false} resolver={{Card, Button, Text, Container, TwoColGrid, Image}}>
+							{/*<Editor enabled={false} resolver={{Card, Button, Text, Container, TwoColGrid, Image, TwoRowGrid, Blocks}}>
 								{this.state.showPreview && <Frame data={this.formatJsonNodes(this.state.previewState)} />}
-								</Editor>}
-							{/*<Preview reRender = {false}/>*/}
+								</Editor>*/}
+							<Editor enabled={false} 
+							        resolver={{Card, Button, Text, Container, TwoColGrid, Image, TwoRowGrid, Blocks}}>
+								{this.state.livePreviewFlag && <Frame data={this.formatJsonNodes(this.state.livePreviewState)} />}
+							</Editor>
+							{/*<Preview/>*/}
 						</Grid>
 
 					</Grid>

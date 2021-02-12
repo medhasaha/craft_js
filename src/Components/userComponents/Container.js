@@ -9,7 +9,7 @@ export const Container = ({ background, padding, children }) => {
   return (
     <Grid container
       ref={(ref) => connect(drag(ref))}
-      style={{ margin: '5px 0px', padding: `${padding}px`}}>
+      style={{ padding: `${padding}px`}}>
         <Grid item xs = {12}>
           {children}
         </Grid>
@@ -19,10 +19,11 @@ export const Container = ({ background, padding, children }) => {
 
 export const ContainerDefaultProps = {
   // background: '#ffffff',
-  padding: 10,
+  padding: 5,
 };
 
 Container.craft = {
+  displayName: "Box",
   props: ContainerDefaultProps,
   related: {
     settings: ContainerSettings,

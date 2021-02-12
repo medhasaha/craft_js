@@ -25,6 +25,7 @@ const SettingsPanel = (props) => {
       selected = {
         id: currentNodeId,
         name: state.nodes[currentNodeId].data.name,
+        displayName : state.nodes[currentNodeId].data.displayName,
         settings: state.nodes[currentNodeId].related && state.nodes[currentNodeId].related.settings,
         isDeletable: query.node(currentNodeId).isDeletable()
       };
@@ -50,7 +51,7 @@ const SettingsPanel = (props) => {
             {"Selected : "} 
           </Typography>
           <Typography variant="subtitle1" style = {{display : "inline"}}>
-            {selected.name} 
+            {selected.displayName} 
           </Typography>
         </Grid>
         <Grid item xs = {12}>

@@ -7,6 +7,7 @@ import { Typography, Grid, FormControl, FormLabel, Input, InputBase, InputLabel,
 
 const style = theme => ({
 	outerDiv: {
+		width : "fit-content",
 		border: "1px solid rgba(255, 255, 255, 0.23)",
 		display : "inline-block",
 		// width : "120px",
@@ -73,22 +74,23 @@ const ContainerSettings = (props) => {
 							<div className = {classes.valueButton} id="decrease" 
 									 style = {{  marginRight: "-4px", borderRight : "1px solid rgba(255, 255, 255, 0.23)"}}
 									 onClick={() => {
-										 let newConPadding = conPadding - 1 < 10 ? 10 : conPadding - 1;
+										 let newConPadding = conPadding - 1 < 1 ? 1 : conPadding - 1;
 										 setConPadding(newConPadding);
 										 setProp((props) => (props.padding = newConPadding), 1000);
 							 		 }}>-</div>
 							<InputBase type="number"
-												 value = {conPadding || 150} 
+												 value = {conPadding || 5} 
 												 classes = {{input : classes.inputBaseInput}}
 												 className = {classes.inputBase}
 												 onChange = {(event) => {
-													 setConPadding(event.target.value);
-													 setProp((props) => (props.padding = event.target.value), 1000);
+													 let n = parseInt(event.target.value);
+													 setConPadding(n);
+													 setProp((props) => (props.padding = n), 1000);
 												 }} />
 							<div className={classes.valueButton} id="increase" 
 									 style = {{  marginLeft: "-4px", borderLeft : "1px solid rgba(255, 255, 255, 0.23)"}}
 									 onClick={() => {
-										 let newConPadding = conPadding + 1 > 720 ? 720 : conPadding + 1;
+										 let newConPadding = conPadding + 1 > 10 ? 10 : conPadding + 1;
 										 setConPadding(newConPadding);
 										 setProp((props) => (props.padding = newConPadding), 1000);
 									 }}>+</div>

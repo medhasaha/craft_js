@@ -11,18 +11,22 @@ export const RenderNode = ({render}) => {
         name: node.data.custom.displayName || node.data.displayName,
       }));
     return (
+      name !== "Image Component" ?
         isHover 
         ? isActive
-          ? <div style={{border : "2px #F05F40 solid", display : name === "Image" ? "inline-flex" : "block", cursor : "move"}} >
+          ? <div style={{outline : "2px #F05F40 solid", cursor : "move", outlineOffset : "-2px"}} >
               {render}
             </div>
-          : <div style={{border : "1px #F05F40 dashed" ,display : name === "Image" ? "inline-flex" : "block", cursor : "move"}}>
+          : <div style={{outline : "1px #F05F40 dashed", cursor : "move", outlineOffset : "-1px"}}>
               {render}
             </div>
         : isActive
-          ? <div style={{border : "2px #F05F40 solid", display : name === "Image" ? "inline-flex" : "block", cursor : "move"}}>
+          ? <div style={{outline : "2px #F05F40 solid", cursor : "move", outlineOffset : "-2px"}}>
               {render}
             </div>
           : <React.Fragment>{render}</React.Fragment>
+      : <React.Fragment>{render}</React.Fragment>
   );
 };
+
+// display : name === "Image Component" ? "inline-block" : "block"

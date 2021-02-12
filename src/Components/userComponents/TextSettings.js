@@ -10,6 +10,7 @@ import { Button } from "./Button.js";
 
 const style = theme => ({
 	outerDiv: {
+		width : "fit-content",
 		border: "1px solid rgba(255, 255, 255, 0.23)",
 		display : "inline-block",
 		// width : "120px",
@@ -115,8 +116,9 @@ const TextSettings = (props) => {
 										classes = {{input : classes.inputBaseInput}}
 										className = {classes.fontSizeInput}
 										onChange={(event) => {
-											setSize(event.target.value);
-											setProp((props) => (props.fontSize = event.target.value), 1000);
+											let n = parseInt(event.target.value);
+											setSize(n);
+											setProp((props) => (props.fontSize = n), 1000);
 										}} />
 							<div className={classes.valueButton} id="increase" 
 									style = {{  marginLeft: "-4px", borderLeft : "1px solid rgba(255, 255, 255, 0.23)"}}
