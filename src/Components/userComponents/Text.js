@@ -11,7 +11,15 @@ export const Text = ({text, fontSize, columnName}) => {
   }));
   return (
     <Typography ref={ref => connect(drag(ref))} 
-                style = {{fontSize : `${fontSize}px`}}>
+                style = {{fontSize : `${fontSize}px`, 
+                          outline : isActive 
+                                    ? "2px #F05F40 solid" 
+                                    : isHover
+                                      ? "2px #F05F40 dashed"
+                                      : "none" ,
+                          outlineOffset: "-2px",
+                          cursor : isHover || isActive ? "move" : "pointer",
+                        }}>
       {text}
     </Typography>
   )

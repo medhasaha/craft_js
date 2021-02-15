@@ -9,19 +9,18 @@ export const Image = ({ src, height, width, selectedColumn, columnName}) => {
     isActive: node.events.selected,
     isHover: node.events.hovered,
   }));
-  // console.log(isActive, isHover)
   return (
     <img
       ref={(ref) => connect(drag(ref))}
       style={{ objectFit : "cover", objectPosition : "center center", 
-               border : isHover 
-                        ? isActive
-                          ? "2px #F05F40 solid"
-                          : "1px #F05F40 dashed"
-                        : isActive
-                          ? "2px #F05F40 solid"
-                          : "none",
-               cursor : isHover || isActive ? "move" : "pointer"}}
+               outline : isActive 
+                          ? "2px #F05F40 solid" 
+                          : isHover
+                            ? "2px #F05F40 dashed"
+                            : "none" ,
+               outlineOffset: "-2px",
+               cursor : isHover || isActive ? "move" : "pointer"
+              }}
       src = {src}
       width = {`${width}%`}
       height = {`${height}px`}

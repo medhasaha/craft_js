@@ -69,17 +69,31 @@ import { Text } from './Text';
 //   );
 // };
 
-export const Card = ({padding, margin, children})  => {
-  const {connectors: { connect, drag },} = useNode();
+export const Card = ({children})  => {
+  const {  isActive, isHover,connectors: {connect, drag} } = useNode((node) => ({
+    isActive: node.events.selected,
+    isHover: node.events.hovered,
+  })); 
+   
   return(
     <MaterialCard 
       ref={(ref) => connect(drag(ref))}
-      style = {{width : "auto", 
-                maxWidth : "150px", 
-                padding: `${padding}px`, 
-                margin: `${margin}px`,
-                // display : "inline-block" 
-                }}>
+      style = {{
+                // width : "auto", 
+                // maxWidth : "150px",
+                // maxHeight : "520px", 
+                padding: "5px", 
+                margin: "4px",
+                outline :isActive 
+                          ? "2px #F05F40 solid" 
+                          : isHover
+                            ? "2px #F05F40 dashed"
+                            : "none" ,
+                outlineOffset: "-2px",
+                cursor : isHover || isActive ? "move" : "pointer",
+                width : "150px",
+                flex: "0 0 auto",
+              }}>
       {children}
     </MaterialCard>
   );

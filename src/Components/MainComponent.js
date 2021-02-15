@@ -19,6 +19,7 @@ import { Text } from '../Components/userComponents/Text';
 import {TwoColGrid} from '../Components/userComponents/TwoColGrid'
 import {TwoRowGrid} from '../Components/userComponents/TwoRowGrid'
 import {Blocks} from '../Components/userComponents/Blocks'
+import {InnerGridItem} from '../Components/userComponents/InnerGridItem'
 
 
 const styles = (theme) => ({
@@ -48,17 +49,29 @@ class MainComponent extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			fileColumnNames : ["country", "flag_img", "flag_official_name", "flag_unofficial_name"],
+			// fileColumnNames : ["country", "flag_img", "flag_official_name", "flag_unofficial_name"],
+			// resultObject : {
+      //   country: "Germany",
+      //   flag_img: "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/100px-Flag_of_Germany.svg.png",
+      //   flag_official_name: "Bundesflagge",
+      //   flag_unofficial_name: "Federal Flag",
+			// },
+			fileColumnNames : ["ID", "Name", "Sex", "Team", "Year", "City", "Sport", "Event", "Medal"],
+			resultObject :  {
+				"ID": 6934,
+				"Name": "Angie Lee Bainbridge",
+				"Sex": "F",
+				"Team": "Australia",
+				"Year": 2008,
+				"City": "Beijing",
+				"Sport": "Swimming",
+				"Event": "Swimming Women's 4 x 200 metres Freestyle Relay",
+				"Medal": "Gold"
+			},
 			final : null,
 			previewState : null,
 			showPreview : false,
 			isSelected : false,
-			resultObject : {
-        country: "Germany",
-        flag_img: "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/100px-Flag_of_Germany.svg.png",
-        flag_official_name: "Bundesflagge",
-        flag_unofficial_name: "Federal Flag",
-			},
 			livePreviewState : null,
 			livePreviewFlag : false,
 		}
@@ -132,8 +145,8 @@ class MainComponent extends Component {
 		const { classes, theme } = this.props;
 		return (
 			<Paper className = {classes.outerPaper}>
-				<Editor resolver={{ Card, Button, Text, Container, TwoColGrid, Image, TwoRowGrid, Blocks }} 
-								onRender={(e) => RenderNode(e)} 
+				<Editor resolver={{ Card, Button, Text, Container, TwoColGrid, Image, TwoRowGrid, Blocks, InnerGridItem }} 
+								// onRender={(e) => RenderNode(e)} 
 								onNodesChange={query => {
 									// console.log("onNodesChange MainComponent", query.getSerializedNodes());
 									this.setState({
@@ -181,7 +194,7 @@ class MainComponent extends Component {
 								{this.state.showPreview && <Frame data={this.formatJsonNodes(this.state.previewState)} />}
 								</Editor>*/}
 							<Editor enabled={false} 
-							        resolver={{Card, Button, Text, Container, TwoColGrid, Image, TwoRowGrid, Blocks}}>
+							        resolver={{Card, Button, Text, Container, TwoColGrid, Image, TwoRowGrid, Blocks, InnerGridItem}}>
 								{this.state.livePreviewFlag && <Frame data={this.formatJsonNodes(this.state.livePreviewState)} />}
 							</Editor>
 							{/*<Preview/>*/}

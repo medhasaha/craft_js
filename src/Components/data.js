@@ -275,3 +275,36 @@ export const olympics = [
       "Medal": "Bronze"
     }
   ]
+
+export const filter = {
+    "Medal" : ["Gold","Bronze","Silver"],
+    "Sport" : ["Swimming", "Shooting"],
+    "Year" : [2008, 2012, 2016],
+    "Sex" : ["M", "F"],
+    Team : ["Australia", "Japan", "United States"],
+}
+
+export const flags =         [{
+    country: "Germany",
+    flag_img: "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/100px-Flag_of_Germany.svg.png",
+    flag_official_name: "Bundesflagge",
+    flag_unofficial_name: "Federal Flag",
+  },
+  {
+    country: "India",
+    flag_img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/100px-Flag_of_India.svg.png",
+    flag_official_name: "Tiranga",
+    flag_unofficial_name: "The Tricolor",
+  },
+  {
+    country: "Scotland",
+    flag_img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Flag_of_Scotland.svg/100px-Flag_of_Scotland.svg.png",
+    flag_official_name: "Bratach-Croise",
+    flag_unofficial_name: "Saltire",
+  },
+  {
+    country: "Brazil",
+    flag_img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/100px-Flag_of_Brazil.svg.png",
+    flag_official_name: "A Auriverde",
+    flag_unofficial_name: "The Gold And Green",
+  }]
